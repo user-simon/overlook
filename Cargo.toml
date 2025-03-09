@@ -2,6 +2,12 @@
 name = "overlook"
 version = "0.1.0"
 edition = "2024"
+exclude = ["/img/"]
+license = "MIT OR Apache-2.0"
+description = "An animated visualiser of different maze generation and solving algorithms, running the terminal"
+keywords = ["cli", "maze", "maze-generation"]
+repository = "https://github.com/user-simon/overlook"
+categories = ["command-line-utilities", "algorithms"]
 
 [dependencies]
 arrayvec = "0.7.6"
