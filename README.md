@@ -18,7 +18,7 @@ And the following solving algorithms are implemented:
 - Right-hand rule
 
 
-# Examples
+# Examples[^1]
 
 Generate with Kruskal's algorithm and solve with flood fill:
 ```
@@ -64,7 +64,7 @@ Options:
 
 ## Architecture
 
-At the core of `overlook` is the _animation_ trait. As its name suggests, it defines an animation running in realtime using a discrete `step` function,[^1] which has mutable access to our _state_. The state contains e.g. the maze, whether nodes have yet been visited, and global settings derived from the CLI. 
+At the core of `overlook` is the _animation_ trait. As its name suggests, it defines an animation running in realtime using a discrete `step` function,[^2] which has mutable access to our _state_. The state contains e.g. the maze, whether nodes have yet been visited, and global settings derived from the CLI. 
 
 Animations performing the same task (e.g. generating or solving the maze) will generally need the same kinds of state. Instead of repeating these for each animation, we define groupings of animations with similar state-needs as _phases_. The following phases are defined (in order of execution): 
 - Generate: generate the maze
@@ -98,4 +98,5 @@ Since we can't render Okhsl colours directly, we first need to convert them to R
 Edges will also need to be rendered if they are open, which is done using the colour corresponding to the oldest of two nodes it connects (if we instead used the youngest, we would find that the offshoots of a corridor being traversed would light up). 
 
 
-[^1]: I never knew my real function. 
+[^1]: These MP4s are so jank but all the animations are _way_ too large for asciinema's servers. 
+[^2]: I never knew my real function. 
