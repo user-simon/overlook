@@ -4,7 +4,7 @@ use crate::Settings;
 
 /// Represents a colour with HSL coordinates. 
 ///
-/// The colours are rendered to the terminal via [`Colour::to_crossterm`] in the Okhsl colour space. 
+/// The colours are rendered to the terminal via [`Hsl::to_crossterm`] in the Okhsl colour space. 
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Hsl {
     pub hue: f64,
