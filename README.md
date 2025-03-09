@@ -18,7 +18,7 @@ And the following solving algorithms are implemented:
 - Right-hand rule
 
 
-# Examples[^1]
+# 📌 Examples[^1]
 
 Generate with Kruskal's algorithm and solve with flood fill:
 ```
@@ -42,7 +42,7 @@ $ overlook --generator wilson --solver a-star
 https://github.com/user-attachments/assets/4032ab4c-dcaa-4e74-8386-35263401101c
 
 
-# Usage
+# 🖥️ Usage
 
 For the best experience, use a terminal emulator with [true color support](https://gist.github.com/kurahaupo/6ce0eaefe5e730841f03cb82b061daa2#now-supporting-true-color). Terminal emulators that only support ANSI escape codes may be used with the `--ansi` flag. 
 
@@ -60,7 +60,7 @@ Options:
 ```
 
 
-# Write-up
+# 🛠️ Write-up
 
 ## Architecture
 
