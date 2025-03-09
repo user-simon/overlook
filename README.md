@@ -1,5 +1,6 @@
 ![banner img](img/banner.png)
 
+
 # ⛕ Overlook
 
 An animated visualiser of different maze generation and solving algorithms, running the terminal. 
@@ -20,30 +21,34 @@ And the following solving algorithms are implemented:
 
 # 📌 Examples[^1]
 
-Generate with Kruskal's algorithm and solve with flood fill:
+### Generate with Kruskal's algorithm and solve with flood fill
 ```
 $ overlook --generator kruskal --solver flood
 ```
 
 https://github.com/user-attachments/assets/ea4b75e2-c3dd-4f59-b7e3-d7b6e8893d48
 
-Generate with randomised depth-first search and solve with the right-hand rule: 
+
+### Generate with randomised depth-first search and solve with the right-hand rule
 ```
 $ overlook --generator dfs --solver right-hand
 ```
 
 https://github.com/user-attachments/assets/750e35f5-8370-43e1-aa76-1a0455e81bb3
 
-Generate with Wilson's algorithm and solve with A★:
+
+### Generate with Wilson's algorithm and solve with A★
 ```
 $ overlook --generator wilson --solver a-star
 ```
 
 https://github.com/user-attachments/assets/4032ab4c-dcaa-4e74-8386-35263401101c
 
+
 # 📮 Installation
 
 Overlook is currently only packaged with Cargo.
+
 
 ### Manually
 
@@ -54,6 +59,7 @@ $ cargo build -r
 ```
 
 After which the binary is located at `./target/release/overlook`. 
+
 
 ### With Cargo
 
