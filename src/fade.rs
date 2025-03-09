@@ -5,21 +5,26 @@ use crate::{
     Animation, Error, Signal, 
 };
 
+/// Plays an animation to flash-fade between two states. 
 pub fn flash_between<T: Phase, U: Phase>(
     mut prev_state: State<T>,
     next: impl FnOnce(State<T>) -> State<U>, 
 ) -> Result<State<U>, Error> {
+    // small delay to make it flow better
     Fade::<T, 5>::run(&mut prev_state)?;
 
+    // advance the state and get the two palettes
     let prev_palette = prev_state.colours.palette;
     let mut state = next(prev_state);
     let next_palette = state.colours.palette;
 
+    // nothing to be done if we're limited to ANSI colours
     if state.settings.ansi {
         Fade::<U>::run(&mut state)?;
         return Ok(state)
     }
     
+    // derive colours to be used in the transition
     let flash_colours = {
         let young = prev_palette.young;
         let old = next_palette.unvisited.unwrap();
@@ -40,6 +45,7 @@ pub fn flash_between<T: Phase, U: Phase>(
     Ok(state)
 }
 
+/// Plays an animation to fully age all nodes. 
 pub fn out<T: Phase>(state: &mut State<T>) -> Result<(), Error> {
     Fade::<T>::run(state)
 }
