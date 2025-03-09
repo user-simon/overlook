@@ -41,6 +41,28 @@ $ overlook --generator wilson --solver a-star
 
 https://github.com/user-attachments/assets/4032ab4c-dcaa-4e74-8386-35263401101c
 
+# 📮 Installation
+
+Overlook is currently only packaged with Cargo.
+
+### Manually
+
+```sh
+$ git clone https://github.com/user-simon/overlook
+$ cd overlook
+$ cargo build -r
+```
+
+After which the binary is located at `./target/release/overlook`. 
+
+### With Cargo
+
+```sh
+$ cargo install overlook
+```
+
+After which the binary is either already on `$PATH` or located at `~/.cargo/bin/overlook` on Linux. 
+
 
 # 🖥️ Usage
 
