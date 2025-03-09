@@ -1,6 +1,6 @@
 ![banner img](img/banner.png)
 
-# 🪾 Overlook
+# ⛕ Overlook
 
 An animated visualiser of different maze generation and solving algorithms, running the terminal. 
 
@@ -20,11 +20,26 @@ And the following solving algorithms are implemented:
 
 # Examples
 
-Generated with Kruskal's and solved with flood fill:
+Generate with Kruskal's algorithm and solve with flood fill:
+```
+$ overlook --generator kruskal --solver flood
+```
 
-Generated with randomised depth-first search and solved with the right-hand rule:
+https://github.com/user-attachments/assets/ea4b75e2-c3dd-4f59-b7e3-d7b6e8893d48
 
-Generated with Wilson's algorithm and solved with A★:
+Generate with randomised depth-first search and solve with the right-hand rule: 
+```
+$ overlook --generator dfs --solver right-hand
+```
+
+https://github.com/user-attachments/assets/750e35f5-8370-43e1-aa76-1a0455e81bb3
+
+Generate with Wilson's algorithm and solve with A★:
+```
+$ overlook --generator wilson --solver a-star
+```
+
+https://github.com/user-attachments/assets/4032ab4c-dcaa-4e74-8386-35263401101c
 
 
 # Usage
@@ -49,7 +64,7 @@ Options:
 
 ## Architecture
 
-The core `overlook` is the _animation_ trait. As its name suggests, it defines an animation running in realtime using a discrete `step` function,[^1] which has mutable access to our _state_. The state contains e.g. the maze, whether nodes have yet been visited, and global settings derived from the CLI. 
+At the core of `overlook` is the _animation_ trait. As its name suggests, it defines an animation running in realtime using a discrete `step` function,[^1] which has mutable access to our _state_. The state contains e.g. the maze, whether nodes have yet been visited, and global settings derived from the CLI. 
 
 Animations performing the same task (e.g. generating or solving the maze) will generally need the same kinds of state. Instead of repeating these for each animation, we define groupings of animations with similar state-needs as _phases_. The following phases are defined (in order of execution): 
 - Generate: generate the maze
