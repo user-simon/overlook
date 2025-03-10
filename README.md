@@ -119,7 +119,9 @@ Each phase defines a colour scheme to be used when rendering the maze. The colou
 - Unvisited nodes
 - Special nodes
 
-When rendering a node, we then linearly interpolate between the colour of the youngest and oldest node using the node's age ($0-255$) as factor. This interpolation looks terrible in the RGB colour space, and we'd like to randomise the hues for variety, so we need a different colour space. HSL meets the requirements, but suffers from inconsistent perceived luminosities at different hues (e.g., pure yellow being perceived as much "brighter" than pure blue), which makes it difficult to design a colour scheme that looks good regardless of the hue. Though no colour space is perfect, we find that Okhsl does an ok job and use it for our colours. 
+When rendering a node, we then interpolate between the colour of the youngest and oldest node using the node's age ($0-255$) as $t$. To improve contrast around the most recently visited nodes (typically algorithm "head" nodes), as well as to improve general appearance, we interpolate with an easing function — a modified `easeOutCirc` made to be more aggressive by taking the cube-root instead of the square-root: $\sqrt[3]{1 - (t - 1)^2}$. 
+
+This interpolation looks terrible in the RGB colour space, and we'd like to randomise the hues for variety, so we need a different colour space. HSL meets the requirements, but suffers from inconsistent perceived luminosities at different hues (e.g., pure yellow being perceived as much "brighter" than pure blue), which makes it difficult to design a colour scheme that looks good regardless of the hue. Though no colour space is perfect, we find that Okhsl does an ok job and use it for our colours. 
 
 Since we can't render Okhsl colours directly, we first need to convert them to RGB, which can be slow. To combat this, we precompute the conversions for all age values $0-255$, yielding a LUT of RGB values. Using this LUT as the interface when rendering also allows us to easily define arbitrary colour schemes, such as only using standard ANSI colours (exposed via `--ansi`). 
 
