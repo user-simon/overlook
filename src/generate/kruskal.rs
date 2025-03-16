@@ -68,6 +68,6 @@ impl Animation for Kruskal {
     }
 
     fn timescale(&self) -> u32 {
-        1000
+        150
     }
 }

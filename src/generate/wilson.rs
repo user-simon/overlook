@@ -71,4 +71,8 @@ impl Animation for Wilson {
         }
         Signal::Continue
     }
+
+    fn timescale(&self) -> u32 {
+        125
+    }
 }

@@ -120,7 +120,7 @@ struct Cli {
     solver: Solver, 
 
     /// Animation timestep. 
-    #[arg(long, short, default_value="100ms")]
+    #[arg(long, short, default_value="60ms")]
     delay: humantime::Duration, 
 
     /// Renders the maze using only standard ANSI colours. 
