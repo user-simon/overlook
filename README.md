@@ -19,7 +19,7 @@ And the following solving algorithms are implemented:
 - Right-hand rule
 
 
-# 📌 Examples[^1]
+## 📌 Examples[^1]
 
 ### Generate with Kruskal's algorithm and solve with flood fill
 ```
@@ -45,7 +45,7 @@ $ overlook --generator wilson --solver a-star
 https://github.com/user-attachments/assets/4032ab4c-dcaa-4e74-8386-35263401101c
 
 
-# 📮 Installation
+## 📮 Installation
 
 Overlook is currently only packaged with Cargo.
 
@@ -70,7 +70,7 @@ $ cargo install overlook
 After which the binary is either already on `$PATH` or located at `~/.cargo/bin/overlook` on Linux. 
 
 
-# 🖥️ Usage
+## 🖥️ Usage
 
 For the best experience, use a terminal emulator with [true color support](https://gist.github.com/kurahaupo/6ce0eaefe5e730841f03cb82b061daa2#now-supporting-true-color). Terminal emulators that only support ANSI escape codes may be used with the `--ansi` flag. 
 
@@ -88,9 +88,9 @@ Options:
 ```
 
 
-# 🛠️ Write-up
+## 🛠️ Write-up
 
-## Architecture
+### Architecture
 
 At the core of `overlook` is the _animation_ trait. As its name suggests, it defines an animation running in realtime using a discrete `step` function,[^2] which has mutable access to our _state_. The state contains e.g. the maze, whether nodes have yet been visited, and global settings derived from the CLI. 
 
@@ -100,7 +100,7 @@ Animations performing the same task (e.g. generating or solving the maze) will g
 - Walk: walk the maze from goal back to start using the parent LUT
 
 
-## Maze
+### Maze
 
 The maze is represented as a lattice of nodes connected by edges, which may be open to signify a passage, or closed to signify a wall. Although this is the representation, this lattice is never stored in memory, and traversed through (encapsulated) coordinate arithmetic. 
 
@@ -111,7 +111,7 @@ Nodes indices are trivially flattened according to $x + y * \text{width}$. To fl
 Inside the maze we keep an edge buffer of booleans indicating whether each edge is open. Other node and edge buffers are used by the implementations of individual animations. This allows us to spare precious nanoseconds in this _extremely_ (very) time-sensitive program by not using hash-tables as lookups. 
 
 
-## Colours
+### Colours
 
 Each phase defines a colour scheme to be used when rendering the maze. The colour scheme contains colours for:
 - The youngest node
