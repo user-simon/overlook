@@ -89,22 +89,22 @@ To install it to your system packages:
 {
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-        overlook.url = "github:user-simon/overlook"; # ① add overlook as input
+        overlook.url = "github:user-simon/overlook"; # (1) add overlook as input
     };
     outputs = { nixpkgs, overlook, ... }@inputs: {
         nixosConfigurations.<host> = nixpkgs.lib.nixosSystem {
             system = <system>;
             modules = [./configuration.nix];
-            specialArgs = { inherit inputs; }; # ② pass overlook to configuration.nix
+            specialArgs = { inherit inputs; }; # (2) pass overlook to configuration.nix
         };
-    }
+    };
 }
 
 # configuration.nix
 { pkgs, inputs, ... }:
 {
     environment.systemPackages = [
-        inputs.overlook.packages."${pkgs.system}".default # ③ add overlook as a system package
+        inputs.overlook.packages."${pkgs.system}".default # (3) add overlook as a system package
     ];
 }
 ```
@@ -120,7 +120,7 @@ To install it via home-manager:
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        overlook.url = "github:user-simon/overlook"; # ① add overlook as input
+        overlook.url = "github:user-simon/overlook"; # (1) add overlook as input
     };
     outputs = { nixpkgs, home-manager, overlook, ... }@inputs:
     let
@@ -130,8 +130,8 @@ To install it via home-manager:
             <username> = home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;
                 modules = [./home.nix];
-                extraSpecialArgs = { inherit inputs; }; # ② pass overlook to home.nix
-            }
+                extraSpecialArgs = { inherit inputs; }; # (2) pass overlook to home.nix
+            };
         };
     };
 }
@@ -140,7 +140,7 @@ To install it via home-manager:
 { pkgs, inputs, ... }:
 {
     home.packages = [
-        inputs.overlook.packages."${pkgs.system}".default # ③ add overlook as a user package
+        inputs.overlook.packages."${pkgs.system}".default # (3) add overlook as a user package
     ];
 }
 ```
