@@ -47,8 +47,6 @@ https://github.com/user-attachments/assets/4032ab4c-dcaa-4e74-8386-35263401101c
 
 ## 📮 Installation
 
-Overlook is currently only packaged with Cargo.
-
 
 ### Manually
 
@@ -68,6 +66,84 @@ $ cargo install overlook
 ```
 
 After which the binary is either already on `$PATH` or located at `~/.cargo/bin/overlook` on Linux. 
+
+
+### With Nix Flakes
+
+To run it once:
+
+```sh
+$ nix run github:user-simon/overlook
+```
+
+To launch a shell with it active:
+
+```sh
+$ nix shell github:user-simon/overlook
+```
+
+To install it to your system packages:
+
+```nix
+# flake.nix
+{
+    inputs = {
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        overlook.url = "github:user-simon/overlook"; # ① add overlook as input
+    };
+    outputs = { nixpkgs, overlook, ... }@inputs: {
+        nixosConfigurations.<host> = nixpkgs.lib.nixosSystem {
+            system = <system>;
+            modules = [./configuration.nix];
+            specialArgs = { inherit inputs; }; # ② pass overlook to configuration.nix
+        };
+    }
+}
+
+# configuration.nix
+{ pkgs, inputs, ... }:
+{
+    environment.systemPackages = [
+        inputs.overlook.packages."${pkgs.system}".default # ③ add overlook as a system package
+    ];
+}
+```
+
+To install it via home-manager:
+
+```nix
+# flake.nix
+{
+    inputs = {
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        home-manager = {
+            url = "github:nix-community/home-manager";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+        overlook.url = "github:user-simon/overlook"; # ① add overlook as input
+    };
+    outputs = { nixpkgs, home-manager, overlook, ... }@inputs:
+    let
+        pkgs = nixpkgs.legacyPackages.${system};
+    in {
+        homeConfigurations = {
+            <username> = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                modules = [./home.nix];
+                extraSpecialArgs = { inherit inputs; }; # ② pass overlook to home.nix
+            }
+        };
+    };
+}
+
+# home.nix
+{ pkgs, inputs, ... }:
+{
+    home.packages = [
+        inputs.overlook.packages."${pkgs.system}".default # ③ add overlook as a user package
+    ];
+}
+```
 
 
 ## 🖥️ Usage
